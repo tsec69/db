@@ -1,0 +1,41 @@
+JOINS
+
+INSERT INTO branch VALUES(4, 'Buffalo', NULL, NULL)
+
+-- Find all branches and the name of their managers
+
+-- INNER JOIN
+SELECT emp_id, fname, branch_name
+FROM employee 
+JOIN branch
+ON emp_id = mgr_id
+
+-- LEFT JOIN
+SELECT emp_id, fname, branch_name
+FROM employee 
+LEFT JOIN branch
+ON emp_id = mgr_id
+
+-- RIGHT JOIN
+SELECT emp_id, fname, branch_name
+FROM employee 
+RIGHT JOIN branch
+ON emp_id = mgr_id
+
+-- FULL OUTER JOIN
+SELECT emp_id, fname, branch_name
+FROM employee 
+FULL OUTER JOIN branch
+ON emp_id = mgr_id
+
+-- NATURAL JOIN
+SELECT emp_id, fname, branch_name
+FROM employee 
+NATURAL JOIN branch
+ORDER BY emp_id
+
+-- CROSS JOIN
+SELECT emp_id, fname, branch_name
+FROM employee 
+CROSS JOIN branch
+ORDER BY emp_id
