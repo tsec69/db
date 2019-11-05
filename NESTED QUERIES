@@ -1,0 +1,76 @@
+NESTED QUERIES
+-- Find names of all employees who have sold over 30,000 to a single client
+
+-- IN OPERATOR
+
+SELECT fname FROM employee
+WHERE emp_id IN
+(
+SELECT emp_id FROM works_with
+WHERE total_sales > 30000
+)
+
+-- NOT IN OPERATOR
+
+SELECT fname, emp_id FROM employee
+WHERE emp_id NOT IN
+(
+SELECT emp_id FROM works_with
+WHERE total_sales < 30000
+)
+
+-- ALL OPERATOR
+
+SELECT fname FROM employee
+WHERE branch_id > ALL
+(
+SELECT branch_id FROM branch
+WHERE mgr_start_date = '04-06-1992'
+)
+
+-- ANY OPERATOR
+
+SELECT fname FROM employee
+WHERE branch_id > ANY
+(
+SELECT branch_id FROM branch
+WHERE mgr_start_date = '04-06-1992'
+)
+
+-- CORRELATED QUERY 
+
+SELECT fname FROM employee
+WHERE emp_id IN
+(
+SELECT emp_id FROM employee
+WHERE super_id IS NULL
+)
+
+
+-- Find all clients who are handled by the branch that Michael Scott manages
+-- Assume you know Michael's ID
+
+SELECT client_name FROM client 
+WHERE branch_id =
+(
+SELECT branch_id FROM branch
+WHERE mgr_id = 102
+)
+
+-- EXISTS OPERATOR
+
+SELECT branch_name FROM branch 
+WHERE EXISTS
+(
+SELECT client_id FROM client
+WHERE client.branch_id = branch.branch_id
+)
+
+-- NOT EXISTS OPERATOR
+
+SELECT branch_name FROM branch 
+WHERE NOT EXISTS
+(
+SELECT client_id FROM client
+WHERE client.branch_id = branch.branch_id
+)
