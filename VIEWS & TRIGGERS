@@ -1,0 +1,76 @@
+VIEWS
+-- Create A Simple View
+
+CREATE VIEW emp_view AS
+SELECT emp_id, fname, lname, salary
+FROM employee
+WHERE sex = 'M'
+
+Select * FROM emp_view
+
+-- Update A Simple View
+
+UPDATE emp_view SET salary = 69000 WHERE emp_id = 107
+
+-- Drop A View
+
+DROP VIEW emp_view
+
+-- View of A View
+
+CREATE VIEW view_user AS
+SELECT fname, lname FROM emp_view
+
+SELECT * FROM view_user
+
+SELECT * FROM EMPLOYEE
+
+-- View On Multiple Table
+
+CREATE VIEW emp_branch AS
+SELECT employee.emp_id, employee.fname, branch.branch_name
+FROM employee, branch
+
+SELECT * FROM emp_branch
+ 
+TRIGGER
+-- BASIC TRIGGER
+
+CREATE TABLE message
+(
+msg VARCHAR(100)
+)
+
+CREATE TRIGGER employee_insert
+BEFORE INSERT ON employee
+FOR EACH ROW BEGIN
+INSERT INTO message VALUES(:NEW.fname);
+END
+
+INSERT INTO employee VALUES(109, 'Kevin', 'Malone', '02-19-1978', 'M', 69000, 106, 3)
+
+SELECT * FROM employee
+
+SELECT * FROM message
+
+DROP TRIGGER employee_insert
+
+-- IF THEN ELSE TRIGGER
+
+CREATE TRIGGER employee_insert
+BEFORE INSERT ON employee
+FOR EACH ROW BEGIN
+IF :NEW.sex = 'M' THEN
+INSERT INTO message VALUES('Male Employee');
+ELSIF :NEW.sex = 'F' THEN
+INSERT INTO message VALUES('Female Employee');
+ELSE
+INSERT INTO message VALUES('Other Employee');
+END IF;
+END
+
+INSERT INTO employee VALUES(110, 'Pam', 'Beesly', '02-19-1988', 'M', 69000, 106, 3)
+
+SELECT * FROM employee
+
+SELECT * FROM message
