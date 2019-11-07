@@ -1,0 +1,24 @@
+CREATE OR REPLACE FUNCTION totalemp
+RETURN number IS
+total number(2) := 0;
+BEGIN
+SELECT count(*) into total
+FROM employee;
+RETURN total;
+END;
+
+Function created
+
+
+DECLARE
+c number(2);
+BEGIN
+c := totalemp();
+dbms_output.put_line(&#39;Total no. of Employees: &#39; || c);
+END;
+
+
+
+Total number of employees: 4
+
+Statement processed.

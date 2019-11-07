@@ -1,0 +1,35 @@
+select * from employee1
+
+EID	ENAME	AGE	SALARY
+1	Parth	19	19500
+2	Darshan	20	13001
+3	Hiresh	22	13401
+
+select * from works
+
+EID	DID	PCT
+1	1	1500
+2	2	2000
+
+
+select * from dept1
+
+DID	BUDGET	MANAGERID	DNAME
+1	1000	4		hw
+2	2000	3		sw
+
+
+create view test as
+select employee1.eid,employee1.ename,employee1.age,employee1.salary,
+works.did,works.pct,dept1.budget,dept1.managerid,dept1.dname
+from employee1
+join works on employee1.eid=works.eid
+join dept1 on works.did=dept1.did
+
+
+select * from test
+
+
+EID	ENAME	AGE	SALARY	DID	PCT	BUDGET	MANAGERID	DNAME
+1	Parth	19	19500	1	1500	1000	4	hw
+2	Darshan	20	13001	2	2000	2000	3	sw

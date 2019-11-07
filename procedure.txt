@@ -1,0 +1,21 @@
+create or replace procedure change_pct(
+emp_id varchar2, sal int
+)IS 
+begin
+update works
+set pct = pct + sal
+where eid =emp_id;
+end change_pct;
+
+
+begin 
+change_pct(1,4000);
+end;
+
+
+select * from works
+
+
+EID	DID	PCT
+1	1	6000
+2	2	2000

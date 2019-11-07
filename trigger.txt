@@ -1,0 +1,63 @@
+select * from employee1
+
+
+EID	ENAME	AGE	SALARY
+1	Parth	19	19500
+2	Darshan	20	13001
+3	Hiresh	22	13401
+4	Dharmik	19	12000
+
+
+Creating trigger:
+CREATE OR REPLACE TRIGGER display_salary_changes
+BEFORE DELETE OR INSERT OR UPDATE ON EMPLOYEE1
+FOR EACH ROW
+DECLARE
+sal_diff number;
+BEGIN
+sal_diff := :NEW.salary - :OLD.salary;
+dbms_output.put_line('Old salary: ' || :OLD.salary);
+dbms_output.put_line('New salary: ' || :NEW.salary);
+dbms_output.put_line('Salary difference: ' || sal_diff);
+END;
+
+
+
+output:
+Trigger created
+
+
+
+
+update employee1 set salary = 15000 where ename like 'Dharmik'
+
+Output: 
+Old salary: 12000
+New salary: 15000
+Salary difference: 3000
+
+1 row(s) updated.
+
+
+
+
+create or replace trigger hello1
+before insert or update or delete on works
+for each row
+declare 
+diffe number;
+begin
+diffe := :new.pct - :old.pct;
+dbms_output.put_line('Difference: '||diffe);
+end;
+
+Output:
+Trigger Created
+
+
+
+
+update works set pct = 2000 where eid = 1
+
+
+Diff: 500
