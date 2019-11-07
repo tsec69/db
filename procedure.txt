@@ -15,7 +15,3 @@ end;
 
 select * from works
 
-
-EID	DID	PCT
-1	1	6000
-2	2	2000
